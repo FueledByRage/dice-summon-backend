@@ -1,8 +1,8 @@
 defmodule DiceSummon.User do
-  @enforce_keys [:username, :password_hash]
+  @enforce_keys [:username, :password]
   defstruct [
     :id,
     :username,
-    :password_hash
+    :password
   ]
 end

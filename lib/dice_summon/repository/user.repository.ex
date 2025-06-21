@@ -27,7 +27,7 @@ defmodule DiceSummon.UsersRepository do
     %User{
       id: id,
       username: doc["username"],
-      password_hash: doc["password_hash"]
+      password: doc["password"]
     }
   end
 end

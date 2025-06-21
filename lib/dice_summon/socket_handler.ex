@@ -49,6 +49,15 @@ defmodule DiceSummon.SocketHandler do
     {:reply, {:text, Jason.encode!(message)}, state}
   end
 
+  def websocket_info({:ws_invite, from_user}, state) do
+    message = %{
+      type: "invite",
+      from: from_user
+    }
+
+    {:reply, {:text, Jason.encode!(message)}, state}
+  end
+
   def websocket_info(_info, state) do
     {:ok, state}
   end
