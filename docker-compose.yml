@@ -12,6 +12,8 @@ services:
     volumes:
       - .:/app
     restart: always
+    networks:
+      - dice_net
 
   mongo:
     image: mongo:6.0
@@ -22,6 +24,12 @@ services:
     restart: always
     environment:
       - MONGO_INITDB_DATABASE=dice_summon
+    networks:
+      - dice_net
 
 volumes:
   mongo-data:
+
+networks:
+  dice_net:
+    driver: bridge
