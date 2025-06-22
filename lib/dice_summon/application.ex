@@ -5,6 +5,7 @@ defmodule DiceSummon.Application do
     children = [
       DiceSummon.MongoConfig,
       {Cachex, name: :match_cache},
+      DiceSummon.Cache,
       {
         Plug.Cowboy,
         scheme: :http,

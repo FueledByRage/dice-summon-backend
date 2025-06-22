@@ -2,7 +2,9 @@ defmodule DiceSummon.SocketHandler do
   @behaviour :cowboy_websocket
 
   def init(req, _state) do
-    {:cowboy_websocket, req, %{}}
+    query_params = :cowboy_req.parse_qs(req)
+    username = List.keyfind(query_params, "username", 0, {"username", nil}) |> elem(1)
+    {:cowboy_websocket, req, %{username: username}}
   end
 
   def websocket_init(state) do
@@ -50,6 +52,8 @@ defmodule DiceSummon.SocketHandler do
   end
 
   def websocket_info({:ws_invite, from_user}, state) do
+    IO.puts("Received invite from #{from_user}")
+
     message = %{
       type: "invite",
       from: from_user
@@ -58,11 +62,13 @@ defmodule DiceSummon.SocketHandler do
     {:reply, {:text, Jason.encode!(message)}, state}
   end
 
-  def websocket_info(_info, state) do
+  def websocket_info(info, state) do
+    IO.inspect(info, label: "websocket_info fallback")
     {:ok, state}
   end
 
-  def terminate(_reason, _req, _state) do
+  def terminate(reason, _req, state) do
+    IO.inspect({:ws_terminated, reason, state})
     :ok
   end
 end
