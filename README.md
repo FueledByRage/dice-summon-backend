@@ -22,8 +22,7 @@ Este é o backend do projeto Dice Summon, escrito em Elixir. Ele fornece uma API
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/dice-summon-backend.git
-cd dice-summon-backend
+git clone https://github.com/FueledByRage/dice-summon-backend
 ````
 
 ### 2. Instalar as dependências
